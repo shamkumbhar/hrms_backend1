@@ -148,15 +148,27 @@ public class AppConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Your Angular frontend
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+    CorsConfiguration configuration = new CorsConfiguration();
+
+    configuration.setAllowCredentials(true);
+ 
+    // Supports dynamic IPs/domains like localhost, EC2, etc.
+
+    configuration.setAllowedOriginPatterns(Arrays.asList("http://*", "https://*"));
+ 
+    configuration.setAllowedHeaders(Arrays.asList("*"));
+
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+ 
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+
 }
+
+ 
+}
+
